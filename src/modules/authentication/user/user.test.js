@@ -1,25 +1,11 @@
 import { describe, it, vi, expect, afterEach, assert } from "vitest";
+import { createUser } from "./user.service";
 import { createUserInRepository } from "./user.repository";
 
 vi.mock("./user.repository", async (importOriginal) => ({
   ...(await importOriginal()),
 
   createUserInRepository: vi.fn((data) => {
-    if (!data.birthday || !data.name) {
-      const error = new Error(
-        `${
-          data.birthday
-            ? "Name is"
-            : data.name
-            ? "Birthday is"
-            : "Name and Birthday are"
-        } required`
-      );
-      error.name = "HttpBadRequest";
-      error.statusCode = 400;
-      throw error;
-    }
-
     return {
       id: 4,
 
@@ -34,7 +20,7 @@ describe("User Service", () => {
   afterEach(() => vi.clearAllMocks());
 
   it("should create an user", async () => {
-    const user = await createUserInRepository({
+    const user = await createUser({
       name: "Valentin R",
       birthday: new Date(1997, 8, 13),
     });
@@ -63,10 +49,10 @@ describe("User Service", () => {
 
   it("should trigger a bad request error when user creation", async () => {
     try {
-      await createUserInRepository({
+      await createUser({
         name: "Valentin R",
       });
-      assert.fail("createUserInRepository should trigger an error.");
+      assert.fail("createUser should trigger an error.");
     } catch (e) {
       expect(e.name).toBe("HttpBadRequest");
 
