@@ -76,4 +76,22 @@ test.describe("Ecommerce's product page", () => {
       page.getByRole("button", { name: " Add to cart" })
     ).toBeVisible();
   });
+
+  test("should add a t-shirt to cart and see it in cart's page", async ({
+    page,
+  }) => {
+    await page.goto("https://automationexercise.com/product_details/30");
+
+    await page.getByRole("button", { name: " Add to cart" }).click();
+
+    await page.getByRole("link", { name: "View cart" }).click();
+
+    expect(page).toHaveURL("https://automationexercise.com/view_cart");
+
+    expect(await page.title()).toBe("Automation Exercise - Checkout");
+
+    expect(
+      page.getByRole("link", { name: "Premium Polo T-Shirts" })
+    ).toBeVisible();
+  });
 });
