@@ -121,6 +121,19 @@ describe("Account Service", () => {
     });
   });
 
+  it("should trigger an error when wrong userId given", async () => {
+    try {
+      await getAccounts({
+        userId: "erreur",
+      });
+      assert.fail("getAccounts should trigger an error.");
+    } catch (e) {
+      expect(e.name).toBe("HttpBadRequest");
+
+      expect(e.statusCode).toBe(400);
+    }
+  });
+
   it("should delete an account with given id and userId", async () => {
     const account = await deleteAccount({ id: 1, userId: 4 });
 

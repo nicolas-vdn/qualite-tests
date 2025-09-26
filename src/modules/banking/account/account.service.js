@@ -36,7 +36,6 @@ export async function getAccounts(userId) {
   if (result.success) {
     return getAccountsInRepository(result.data);
   } else {
-    console.log(result.error);
     throw new HttpBadRequest(result.error);
   }
 }
