@@ -60,7 +60,7 @@ describe("User Service", () => {
     }
   });
 
-  it("should trigger a forbideen error when user is too young in creation", async () => {
+  it("should trigger a forbidden error when user is too young in creation", async () => {
     try {
       await createUser({
         name: "Valentin R",
