@@ -26,7 +26,7 @@ test.describe("Ecommerce's product page", () => {
     await page.getByRole("link", { name: " Products" }).click();
 
     // On vérifie que l'URL de la page est bien celle de la page des produits
-    expect(page).toHaveURL("https://automationexercise.com/products");
+    await expect(page).toHaveURL("https://automationexercise.com/products");
     // On vérifie que le titre de la page est bien celui de la page des produits
     expect(await page.title()).toBe("Automation Exercise - All Products");
   });
@@ -86,11 +86,11 @@ test.describe("Ecommerce's product page", () => {
 
     await page.getByRole("link", { name: "View cart" }).click();
 
-    expect(page).toHaveURL("https://automationexercise.com/view_cart");
+    await expect(page).toHaveURL("https://automationexercise.com/view_cart");
 
     expect(await page.title()).toBe("Automation Exercise - Checkout");
 
-    expect(
+    await expect(
       page.getByRole("link", { name: "Premium Polo T-Shirts" })
     ).toBeVisible();
   });

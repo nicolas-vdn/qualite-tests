@@ -99,15 +99,13 @@ export function RegistrationForm() {
     if (Object.keys(formErrors).length === 0) {
       setIsSubmitting(true);
 
-      // Simulation d'une soumission
-      setTimeout(() => {
-        console.log("Données du formulaire:", formData);
-        setShowSuccessModal(true);
-        setIsSubmitting(false);
+      setShowSuccessModal(true);
 
-        // Réinitialiser le formulaire
-        setFormData({ username: "", email: "", password: "" });
-      }, 1500);
+      console.log("Données du formulaire:", formData);
+
+      setFormData({ username: "", email: "", password: "" });
+
+      setIsSubmitting(false);
     }
   };
 

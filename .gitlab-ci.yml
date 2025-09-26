@@ -44,7 +44,7 @@ e2e_build:
       - tests/AUTH-E2E/.next/
     expire_in: 1h
 
-e2e_e2e_tests:
+e2e_tests:
   stage: e2e_test
   needs:
     - e2e_build
@@ -53,4 +53,6 @@ e2e_e2e_tests:
       alias: backend
   script:
     - cd tests/AUTH-E2E/
-    - npx start-server-and-test 'npm start' http://localhost:3000 'npm run test:e2e'
+    - npm start http://localhost:3000
+    - cd ../../
+    - npx playwright test

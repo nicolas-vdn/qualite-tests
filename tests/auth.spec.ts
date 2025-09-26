@@ -10,7 +10,7 @@ test.describe("Authentication's form page", () => {
   test("should see the form page", async ({ page }) => {
     expect(await page.title()).toBe("Authentification form");
 
-    expect(page.getByText("Créer un compte")).toBeVisible();
+    await expect(page.getByText("Créer un compte")).toBeVisible();
   });
 
   test("should fill the form and validate", async ({ page }) => {
@@ -30,7 +30,7 @@ test.describe("Authentication's form page", () => {
       page.getByRole("button", { name: "Création en cours..." })
     ).not.toBeVisible();
 
-    expect(page.getByText("Inscription réussie")).toBeVisible();
+    await expect(page.getByText("Inscription réussie")).toBeVisible();
   });
 
   test("should get an error when the username is forgot", async ({ page }) => {
@@ -48,9 +48,9 @@ test.describe("Authentication's form page", () => {
       page.getByRole("button", { name: "Création en cours..." })
     ).not.toBeVisible();
 
-    expect(page.getByText("Le username est requis")).toBeVisible();
+    await expect(page.getByText("Le username est requis")).toBeVisible();
 
-    expect(page.getByText("Inscription réussie")).not.toBeVisible();
+    await expect(page.getByText("Inscription réussie")).not.toBeVisible();
   });
 
   test("should get an error when the email is forgot", async ({ page }) => {
@@ -66,9 +66,9 @@ test.describe("Authentication's form page", () => {
       page.getByRole("button", { name: "Création en cours..." })
     ).not.toBeVisible();
 
-    expect(page.getByText("L'adresse email est requise")).toBeVisible();
+    await expect(page.getByText("L'adresse email est requise")).toBeVisible();
 
-    expect(page.getByText("Inscription réussie")).not.toBeVisible();
+    await expect(page.getByText("Inscription réussie")).not.toBeVisible();
   });
 
   test("should get an error when the password is forgot", async ({ page }) => {
@@ -84,9 +84,9 @@ test.describe("Authentication's form page", () => {
       page.getByRole("button", { name: "Création en cours..." })
     ).not.toBeVisible();
 
-    expect(page.getByText("Le mot de passe est requis")).toBeVisible();
+    await expect(page.getByText("Le mot de passe est requis")).toBeVisible();
 
-    expect(page.getByText("Inscription réussie")).not.toBeVisible();
+    await expect(page.getByText("Inscription réussie")).not.toBeVisible();
   });
 
   test("should get an error when the username is incorrect", async ({
@@ -108,11 +108,11 @@ test.describe("Authentication's form page", () => {
       page.getByRole("button", { name: "Création en cours..." })
     ).not.toBeVisible();
 
-    expect(
+    await expect(
       page.getByText("Le username doit contenir au moins 3 caractères")
     ).toBeVisible();
 
-    expect(page.getByText("Inscription réussie")).not.toBeVisible();
+    await expect(page.getByText("Inscription réussie")).not.toBeVisible();
   });
 
   test("should get an error when the email is incorrect", async ({ page }) => {
@@ -132,11 +132,11 @@ test.describe("Authentication's form page", () => {
       page.getByRole("button", { name: "Création en cours..." })
     ).not.toBeVisible();
 
-    expect(
+    await expect(
       page.getByText("Veuillez entrer une adresse email valide")
     ).toBeVisible();
 
-    expect(page.getByText("Inscription réussie")).not.toBeVisible();
+    await expect(page.getByText("Inscription réussie")).not.toBeVisible();
   });
 
   test("should get an error when the password is incorrect", async ({
@@ -158,12 +158,12 @@ test.describe("Authentication's form page", () => {
       page.getByRole("button", { name: "Création en cours..." })
     ).not.toBeVisible();
 
-    expect(
+    await expect(
       page.getByText(
         "Le mot de passe doit contenir au moins une majuscule, une minuscule et un chiffre"
       )
     ).toBeVisible();
 
-    expect(page.getByText("Inscription réussie")).not.toBeVisible();
+    await expect(page.getByText("Inscription réussie")).not.toBeVisible();
   });
 });
