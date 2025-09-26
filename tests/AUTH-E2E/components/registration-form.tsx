@@ -53,12 +53,11 @@ export function RegistrationForm() {
   const validateForm = (): FormErrors => {
     const newErrors: FormErrors = {};
 
-    // Validation du nom d'utilisateur
+    // Validation du username
     if (!formData.username.trim()) {
-      newErrors.username = "Le nom d'utilisateur est requis";
+      newErrors.username = "Le username est requis";
     } else if (formData.username.trim().length < 3) {
-      newErrors.username =
-        "Le nom d'utilisateur doit contenir au moins 3 caractères";
+      newErrors.username = "Le username doit contenir au moins 3 caractères";
     }
 
     // Validation de l'email
@@ -130,17 +129,17 @@ export function RegistrationForm() {
 
           <CardContent>
             <form onSubmit={handleSubmit} className="space-y-6">
-              {/* Champ nom d'utilisateur */}
+              {/* Champ username */}
               <div className="space-y-2">
                 <Label htmlFor="username" className="text-sm font-medium">
-                  Nom d'utilisateur
+                  Username
                 </Label>
                 <div className="relative">
                   <User className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground" />
                   <Input
                     id="username"
                     type="text"
-                    placeholder="Votre nom d'utilisateur"
+                    placeholder="Votre username"
                     value={formData.username}
                     onChange={(e) =>
                       handleInputChange("username", e.target.value)
@@ -169,7 +168,7 @@ export function RegistrationForm() {
                   <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground" />
                   <Input
                     id="email"
-                    type="email"
+                    type="text"
                     placeholder="votre@email.com"
                     value={formData.email}
                     onChange={(e) => handleInputChange("email", e.target.value)}
