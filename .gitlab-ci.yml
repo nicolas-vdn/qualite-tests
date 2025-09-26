@@ -29,7 +29,7 @@ e2e_install:
   stage: e2e_install
   script:
     - cd tests/AUTH-E2E/
-    # - corepack enable
+    - corepack enable
     - npm ci
     - npx playwright install --with-deps
     - echo "Installation des dépendances OK"
