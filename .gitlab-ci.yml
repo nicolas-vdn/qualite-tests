@@ -1,0 +1,55 @@
+stages:
+  - vitest
+  - auth_install
+  - auth_build
+  - auth_test
+
+variables:
+  NODE_ENV: "production"
+  NEXT_TELEMETRY_DISABLED: "1"
+  PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: "0"
+
+default:
+  image: node:20
+
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - tests/AUTH-E2E/node_modules
+    - node_modules/
+
+vitest:
+  stage: vitest
+  script:
+    - npm ci
+    - npm test
+
+auth_install:
+  stage: auth_install
+  script:
+    - cd tests/AUTH-E2E/
+    - corepack enable
+    - npm ci
+    - npx playwright install --with-deps
+    - echo "Installation des dépendances OK"
+
+auth_build:
+  stage: auth_build
+  script:
+    - cd tests/AUTH-E2E/
+    - npm run build
+  artifacts:
+    paths:
+      - tests/AUTH-E2E/.next/
+    expire_in: 1h
+
+auth_e2e_tests:
+  stage: auth_test
+  needs:
+    - build
+  services:
+    - name: node:18
+      alias: backend
+  script:
+    - cd tests/AUTH-E2E/
+    - npx start-server-and-test 'npm start' http://localhost:3000 'npm run test:e2e'
