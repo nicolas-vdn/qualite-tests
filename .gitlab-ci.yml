@@ -46,7 +46,7 @@ auth_build:
 auth_e2e_tests:
   stage: auth_test
   needs:
-    - build
+    - auth_build
   services:
     - name: node:18
       alias: backend
